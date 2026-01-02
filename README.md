@@ -2,7 +2,7 @@
 
 This project is our submission for  GoedWare Game Jam Cutscene 2 Edition game jam, created using Godot. Theme of game jame **FIVE SECONDS TOO LATE**.
 
-**The game is available on itch.io. Play it here:** TBA
+**The game is available on itch.io. Play it here:** https://hubacekjakub.itch.io/quest-stop-the-ritual
 
 ## Game description
 
@@ -10,7 +10,7 @@ TBA
 
 ### Controls
 
-Move the mouse to rotate the cutscene. This control is not for video. Left-click or double-click to reset the rotation.
+Move the mouse to rotate the cutscene. This control is not for video. Left-click, Right-click, Middle-click or double-click to reset the rotation.
 
 ## Requirements
 
