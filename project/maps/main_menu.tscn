@@ -2,5 +2,89 @@
 
 [ext_resource type="Script" uid="uid://ba15r6yu282hx" path="res://scripts/main_menu.gd" id="1_pibn7"]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_pibn7")
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="LeftBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CreditsLabel" type="Label" parent="MarginContainer/HBoxContainer/LeftBoxContainer"]
+layout_mode = 2
+text = "Programmers:
+hubacekjakub
+JaMe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="VersionLabel" type="Label" parent="MarginContainer/HBoxContainer/CenterBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Version: 1.0"
+horizontal_alignment = 1
+
+[node name="MainMenuBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CenterBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/CenterBoxContainer/MainMenuBox"]
+layout_mode = 2
+text = "Do you accept this quest?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/CenterBoxContainer/MainMenuBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "YES!"
+
+[node name="RightBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="CreditsLabel" type="Label" parent="MarginContainer/HBoxContainer/RightBoxContainer"]
+layout_mode = 2
+text = "Art and Music:
+Meru"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
