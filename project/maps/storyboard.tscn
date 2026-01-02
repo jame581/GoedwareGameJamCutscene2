@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6nfpcxjfmvx4"]
+
+[ext_resource type="Script" uid="uid://w12nksi74sj1" path="res://scripts/camera_movement.gd" id="1_crhbs"]
+[ext_resource type="Script" uid="uid://dfn7ihaib2vov" path="res://scripts/storyboard.gd" id="1_xj4j0"]
+
+[node name="Storyboard" type="Node2D"]
+script = ExtResource("1_xj4j0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_crhbs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Loops" type="Node" parent="."]
+
+[node name="Loop1" type="Node2D" parent="Loops"]
+
+[node name="Loop2" type="Node2D" parent="Loops"]
