@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkv7qdhv6nigf"]
+
+[ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_xkflo"]
+
+[node name="SceneTemplate" type="Node2D"]
+script = ExtResource("1_xkflo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Background" type="Node2D" parent="."]
