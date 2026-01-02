@@ -1,0 +1,271 @@
+name: "Build and Release"
+
+# Trigger on version tags and manual dispatch
+on:
+  push:
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: "4.5.1"
+  GODOT_EXPORT_VERSION: "4.5.1-stable"
+  GAME_NAME: "QuestStopTheRitual"
+
+jobs:
+  # Quick validation job - runs first to catch issues early without downloading Godot
+  validate:
+    runs-on: ubuntu-latest
+    name: "🔍 Quick Validate Project"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          lfs: true
+
+      - name: Verify core project files and directories
+        run: |
+          echo "🔍 Checking core project files and directories..."
+
+          if [ ! -f "project/project.godot" ]; then
+            echo "❌ project.godot not found!"
+            exit 1
+          fi
+
+          if [ ! -d "project/scenes" ]; then
+            echo "❌ scenes directory not found!"
+            exit 1
+          fi
+
+          if [ ! -d "project/maps" ]; then
+            echo "❌ maps directory not found!"
+            exit 1
+          fi
+
+          if [ ! -d "project/scripts" ]; then
+            echo "❌ scripts directory not found!"
+            exit 1
+          fi
+
+          echo "✅ Core project files and directories present"
+
+      - name: Verify export configuration
+        run: |
+          echo "🔍 Checking export configuration..."
+
+          if [ ! -f "project/export_presets.cfg" ]; then
+            echo "⚠️ export_presets.cfg not found - exports may fail!"
+            echo "📝 Create export presets in Godot editor before building"
+          else
+            echo "✅ Export presets configuration found"
+
+            # Validate export presets contain required platforms
+            if ! grep -q "platform=\"Web\"" project/export_presets.cfg; then
+              echo "⚠️ Web export preset not found in export_presets.cfg"
+            fi
+            if ! grep -q "platform=\"Windows Desktop\"" project/export_presets.cfg; then
+              echo "⚠️ Windows Desktop export preset not found in export_presets.cfg"
+            fi
+            if ! grep -q "platform=\"Linux/X11\"" project/export_presets.cfg; then
+              echo "⚠️ Linux export preset not found in export_presets.cfg"
+            fi
+          fi
+
+          echo "✅ Export configuration validation completed"
+
+      - name: Check GDScript syntax
+        run: |
+          echo "🔍 Checking GDScript files for basic syntax issues..."
+
+          # Find all .gd files
+          GD_FILES=$(find project -name "*.gd" -type f)
+
+          if [ -z "$GD_FILES" ]; then
+            echo "⚠️ No GDScript files found"
+            exit 0
+          fi
+
+          ERROR_COUNT=0
+
+          for file in $GD_FILES; do
+            echo "📝 Checking: $file"
+
+            # Check for common syntax errors
+            if grep -n "extends$" "$file"; then
+              echo "❌ $file: 'extends' without class name"
+              ERROR_COUNT=$((ERROR_COUNT + 1))
+            fi
+
+            # Check for unmatched brackets (basic check)
+            OPEN_BRACES=$(grep -o "{" "$file" | wc -l)
+            CLOSE_BRACES=$(grep -o "}" "$file" | wc -l)
+            if [ "$OPEN_BRACES" -ne "$CLOSE_BRACES" ]; then
+              echo "⚠️ $file: Unmatched braces (${OPEN_BRACES} open, ${CLOSE_BRACES} close)"
+            fi
+
+            # Check for missing colons after control structures
+            if grep -n "if .*[^:]$" "$file"; then
+              echo "⚠️ $file: Potential missing colon after if statement"
+            fi
+
+          done
+
+          if [ $ERROR_COUNT -gt 0 ]; then
+            echo "❌ Found $ERROR_COUNT syntax errors"
+            exit 1
+          fi
+
+          echo "✅ Basic GDScript syntax check completed"
+
+  # Build job - runs after validation
+  build_game:
+    runs-on: ubuntu-latest
+    name: "🏗️ Build Game"
+    needs: validate
+    steps:
+      # Always include the checkout step so that
+      # your project is available for Godot to export
+    - name: Checkout
+      uses: actions/checkout@v5
+      with:
+        lfs: true
+
+    - name: Install Wine
+      id: wine_install
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y --no-install-recommends wine64
+
+        echo "WINE_PATH=$(which wine64)" >> $GITHUB_OUTPUT
+
+    - name: Export Game
+      id: export
+      # Use latest version (see releases for all versions)
+      uses: firebelley/godot-export@v7.0.0
+      with:
+        # Defining all the required inputs
+        godot_executable_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_EXPORT_VERSION }}/Godot_v${{ env.GODOT_EXPORT_VERSION }}_linux.x86_64.zip
+        godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/${{ env.GODOT_EXPORT_VERSION }}/Godot_v${{ env.GODOT_EXPORT_VERSION }}_export_templates.tpz
+        relative_project_path: ./project # Project is in project directory
+        cache: true
+        export_debug: false
+        archive_output: true
+        wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.GAME_NAME }}-builds-${{ github.sha }}
+        path: ${{ steps.export.outputs.archive_directory }}/*
+        retention-days: 30
+
+  # Release job - only runs on version tags
+  release_game:
+    # Only run this job if it's a version tag push
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build_game # Wait for build to complete
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Need permissions for release creation
+    name: "📦 Create Release"
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v5
+      with:
+        name: ${{ env.GAME_NAME }}-builds-${{ github.sha }}
+        path: ./builds
+
+    - name: Create Release
+      uses: ncipollo/release-action@v1.18.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        generateReleaseNotes: true
+        tag: ${{ github.ref_name }}
+        artifacts: ./builds/*
+        name: "${{ env.GAME_NAME }} ${{ github.ref_name }}"
+        body: |
+          ## ${{ env.GAME_NAME }} Release ${{ github.ref_name }}
+
+          🎮 **Godot Quickstart Game** - Built automatically from GitHub Actions using Godot ${{ env.GODOT_EXPORT_VERSION }}
+
+          ### 📥 Downloads
+          Download the appropriate build for your platform from the assets below:
+          - **Windows**: `.exe` file
+          - **Linux**: `.x86_64` file
+          - **Web**: `.zip` file (extract and run locally or host on web server)
+
+          ### 🔄 Changes
+          See the auto-generated release notes below for detailed changes.
+
+  # Deploy job - only runs on version tags after release
+  deploy_game:
+    # Only run this job if it's a version tag push
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: release_game # Wait for release to complete
+    runs-on: ubuntu-latest
+    name: "🚀 Deploy to itch.io"
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v5
+      with:
+        name: ${{ env.GAME_NAME }}-builds-${{ github.sha }}
+        path: ./builds
+
+    - name: Setup Butler (itch.io CLI)
+      uses: jdno/setup-butler@v1.6.0
+
+    - name: Deploy All Builds to itch.io
+      env:
+        BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      run: |
+        echo "🚀 Deploying all builds to itch.io..."
+        echo "📋 Available files:"
+        ls -la ./builds/
+
+        # Deploy Web Build
+        WEB_BUILD="./builds/Web.zip"
+        if [ -f "$WEB_BUILD" ]; then
+          echo "📦 Deploying web build..."
+          mkdir -p ./web_build
+          unzip "$WEB_BUILD" -d ./web_build
+          butler push "./web_build" ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME_NAME }}:web --userversion ${{ github.ref_name }}
+          echo "✅ Web build deployed successfully!"
+        else
+          echo "⚠️ Web.zip not found, skipping web deployment"
+        fi
+
+        # Deploy Windows Build
+        WINDOWS_BUILD="./builds/Windows.zip"
+        if [ -f "$WINDOWS_BUILD" ]; then
+          echo "📦 Deploying Windows build..."
+          mkdir -p ./windows_build
+          unzip "$WINDOWS_BUILD" -d ./windows_build
+          butler push "./windows_build" ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME_NAME }}:windows --userversion ${{ github.ref_name }}
+          echo "✅ Windows build deployed successfully!"
+        else
+          echo "⚠️ Windows.zip not found, skipping Windows deployment"
+        fi
+
+        # Deploy Linux Build
+        LINUX_BUILD="./builds/Linux.zip"
+        if [ -f "$LINUX_BUILD" ]; then
+          echo "📦 Deploying Linux build..."
+          mkdir -p ./linux_build
+          unzip "$LINUX_BUILD" -d ./linux_build
+          butler push "./linux_build" ${{ secrets.ITCH_USERNAME }}/${{ secrets.ITCH_GAME_NAME }}:linux --userversion ${{ github.ref_name }}
+          echo "✅ Linux build deployed successfully!"
+        else
+          echo "⚠️ Linux.zip not found, skipping Linux deployment"
+        fi
+
+        echo "🎉 All available builds deployed to itch.io!"
+        echo "🌐 Game should be available at: https://${{ secrets.ITCH_USERNAME }}.itch.io/${{ secrets.ITCH_GAME_NAME }}"
+

@@ -1,0 +1,193 @@
+name: "Quick Validation"
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main, develop ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: "4.4.1"
+  GAME_NAME: "QuestStopTheRitual"
+
+jobs:
+  # Project validation job - runs fast checks
+  quick-check:
+    runs-on: ubuntu-latest
+    name: "⚡ Quick Validation"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: ${{ env.GODOT_VERSION }}
+          use-dotnet: false
+          include-templates: true
+
+      - name: Cache Godot Files
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.local/share/godot/export_templates
+            .godot/
+          key: ${{ runner.os }}-godot-${{ env.GODOT_VERSION }}-${{ hashFiles('project/**/*.gd', 'project/**/*.tscn', 'project/**/*.tres', 'project/project.godot') }}
+          restore-keys: |
+            ${{ runner.os }}-godot-${{ env.GODOT_VERSION }}-
+
+      - name: Cache Status Report
+        run: |
+          if [ "${{ steps.cache-godot.outputs.cache-hit }}" == "true" ]; then
+            echo "🎯 Cache HIT! Using cached Godot files"
+          else
+            echo "📥 Cache MISS - downloading and caching Godot files"
+          fi
+
+      - name: Verify Project Structure
+        run: |
+          echo "🔍 Checking project structure..."
+
+          # Check essential files
+          if [ ! -f "project/project.godot" ]; then
+            echo "❌ project.godot not found!"
+            exit 1
+          fi
+
+          if [ ! -d "project/scenes" ]; then
+            echo "❌ scenes directory not found!"
+            exit 1
+          fi
+
+          if [ ! -d "project/scripts" ]; then
+            echo "❌ scripts directory not found!"
+            exit 1
+          fi
+
+          echo "✅ Project structure is valid"
+
+      - name: Import Project
+        run: |
+          echo "📦 Importing project..."
+          timeout 300 godot --headless --verbose --editor --quit-after 10 --path project || {
+            echo "⚠️ Project import completed with timeout"
+          }
+
+      - name: Validate all scripts
+        run: |
+          echo "🔍 Validating all scripts..."
+          if ! godot --headless --check-only --quit --path project; then
+            echo "❌ Script validation failed"
+            exit 1
+          fi
+          echo "✅ All scripts are valid"
+
+      - name: Validate each level loading
+        run: |
+          echo "🎮 Testing maps..."
+          LEVELS_DIR="./project/maps"  # Change this if your levels are stored elsewhere
+          EXIT_CODE=0
+
+          # Check if levels directory exists
+          if [ ! -d "$LEVELS_DIR" ]; then
+            echo "📁 Maps directory '$LEVELS_DIR' does not exist, skipping level tests"
+            exit 0
+          fi
+
+          LEVELS=$(find "$LEVELS_DIR" -type f \( -name "*.tscn" -o -name "*.scn" \) 2>/dev/null)
+
+          if [ -z "$LEVELS" ]; then
+            echo "⚠️ No levels found in $LEVELS_DIR, skipping level tests"
+            exit 0
+          fi
+
+          echo "📋 Found levels:"
+          echo "$LEVELS"
+
+          for level in $LEVELS; do
+            echo "=== Opening and closing level: $level ==="
+            if ! timeout 10 godot --headless --path . --main-scene "$level" --quit-after 5; then
+              echo "❌ Level $level failed to run"
+              EXIT_CODE=1
+            else
+              echo "✅ Level $level completed successfully"
+            fi
+          done
+
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "✅ All levels tested successfully"
+          else
+            echo "❌ Some levels failed"
+          fi
+          exit $EXIT_CODE
+
+      - name: Check for Common Issues
+        run: |
+          echo "🔍 Checking for common issues..."
+
+          # Check for missing dependencies or common problems
+          if grep -r "missing" . --include="*.gd" --include="*.tscn"; then
+            echo "⚠️  Found 'missing' references in files"
+          fi
+
+          # Check for TODO/FIXME comments
+          if grep -r "TODO\|FIXME" . --include="*.gd"; then
+            echo "📝 Found TODO/FIXME comments in code"
+          fi
+
+          echo "✅ Common issues check completed"
+
+  # Code style and formatting checks
+  style-check:
+    runs-on: ubuntu-latest
+    name: "📏 Code Style Check"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Check File Formatting
+        run: |
+          echo "📏 Checking file formatting..."
+
+          # Check for trailing whitespace
+          if grep -r '[[:space:]]$' . --include="*.gd" --include="*.cs"; then
+            echo "❌ Found trailing whitespace in files"
+            exit 1
+          fi
+
+          # Check for mixed line endings
+          if find . -name "*.gd" -exec file {} \; | grep -E "CRLF|mixed"; then
+            echo "❌ Found files with CRLF or mixed line endings"
+            exit 1
+          fi
+
+          echo "✅ File formatting is correct"
+
+      - name: Check GDScript Style
+        run: |
+          echo "📏 Checking GDScript style..."
+
+          # Basic style checks for GDScript files
+          for file in $(find . -name "*.gd"); do
+            echo "Checking style in $file..."
+
+            # Check for proper class naming (should start with capital letter)
+            if grep -q "^class_name [a-z]" "$file"; then
+              echo "⚠️  Class name should start with capital letter in $file"
+            fi
+
+            # Check for proper indentation (tabs vs spaces)
+            if grep -q "^    " "$file" && grep -q "^	" "$file"; then
+              echo "⚠️  Mixed tabs and spaces in $file"
+            fi
+          done
+
+          echo "✅ GDScript style check completed"
