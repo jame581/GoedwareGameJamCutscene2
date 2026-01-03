@@ -1,15 +1,71 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0dn8hgce48ky"]
+[gd_scene load_steps=8 format=3 uid="uid://c0dn8hgce48ky"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_gii2d"]
+[ext_resource type="Texture2D" uid="uid://d2w751bewx6gt" path="res://resources/art/ph_background_herowalking.png" id="2_ajb23"]
+[ext_resource type="Texture2D" uid="uid://mfdjfakpkyef" path="res://resources/art/mage_start_ritual/firstscene1.png" id="3_4tx7i"]
+[ext_resource type="Texture2D" uid="uid://dxlhrqahbt6c4" path="res://resources/art/mage_start_ritual/firstscene2.png" id="4_lldv7"]
+
+[sub_resource type="Animation" id="Animation_idl4y"]
+resource_name = "story"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MageHandSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 223), Vector2(0, 0), Vector2(0, 57), Vector2(0, 0), Vector2(0, 0), Vector2(0, 226)]
+}
+
+[sub_resource type="Animation" id="Animation_lldv7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MageHandSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 223)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ajb23"]
+_data = {
+&"RESET": SubResource("Animation_lldv7"),
+&"story": SubResource("Animation_idl4y")
+}
 
 [node name="SceneMageStartRitual" type="Node2D"]
 script = ExtResource("1_gii2d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ajb23")
+}
 
 [node name="Background" type="Node2D" parent="."]
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background"]
+texture = ExtResource("2_ajb23")
+centered = false
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 offset_right = 640.0
 offset_bottom = 360.0
-color = Color(0.4029551, 0.3762884, 0.011383789, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="MageSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_4tx7i")
+centered = false
+
+[node name="MageHandSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 223)
+texture = ExtResource("4_lldv7")
+centered = false
