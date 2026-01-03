@@ -20,3 +20,4 @@ func _on_animation_finished(anim_name):
 	if anim_name == "story":
 		print("Animation 'story' finished playing")
 		emit_signal("scene_finished", anim_name)
+
