@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://433o07htfwpi"]
+[gd_scene load_steps=11 format=3 uid="uid://433o07htfwpi"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_mm46i"]
 [ext_resource type="AudioStream" uid="uid://dnkxcxbnb0l4j" path="res://resources/sound/button_click.wav" id="2_10e70"]
 [ext_resource type="AudioStream" uid="uid://didhhbvihnqe1" path="res://resources/sound/pencil_check.wav" id="3_mm46i"]
+[ext_resource type="Texture2D" uid="uid://bv5ntkegyaaku" path="res://resources/art/background_hero.png" id="4_10e70"]
 [ext_resource type="Texture2D" uid="uid://xdmr87g5pyc1" path="res://resources/art/helmet_red.png" id="5_mm46i"]
 [ext_resource type="Texture2D" uid="uid://pmge886bahpn" path="res://resources/art/helmet_blue.png" id="6_10e70"]
 [ext_resource type="Texture2D" uid="uid://brbwv21j61m1" path="res://resources/art/hand.png" id="6_s7wt3"]
@@ -101,13 +102,17 @@ offset_right = 640.0
 offset_bottom = 360.0
 color = Color(0.4029551, 0.3762884, 0.011383789, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+texture = ExtResource("4_10e70")
+centered = false
+
 [node name="HelmetLeft" type="Sprite2D" parent="Background"]
-position = Vector2(-95, 19)
+position = Vector2(-140, -7)
 texture = ExtResource("5_mm46i")
 centered = false
 
 [node name="HelmetRight" type="Sprite2D" parent="Background"]
-position = Vector2(-38, 26)
+position = Vector2(-19, -6)
 texture = ExtResource("6_10e70")
 centered = false
 

@@ -1,11 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://c54o4ukoxdaj1"]
+[gd_scene load_steps=11 format=3 uid="uid://c54o4ukoxdaj1"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_qlrh7"]
 [ext_resource type="AudioStream" uid="uid://dnkxcxbnb0l4j" path="res://resources/sound/button_click.wav" id="2_i6uxv"]
 [ext_resource type="AudioStream" uid="uid://dgg2vwe13gu45" path="res://resources/sound/pencil_check_2.wav" id="3_7af4x"]
 [ext_resource type="Texture2D" uid="uid://1ueptbg1rc2j" path="res://resources/art/sword_fire.png" id="4_f2ko8"]
+[ext_resource type="Texture2D" uid="uid://bv5ntkegyaaku" path="res://resources/art/background_hero.png" id="4_i6uxv"]
 [ext_resource type="Texture2D" uid="uid://d214nh0p713fj" path="res://resources/art/sword_ice.png" id="5_c5ef0"]
 [ext_resource type="Texture2D" uid="uid://brbwv21j61m1" path="res://resources/art/hand.png" id="6_xboxt"]
+
+[sub_resource type="Animation" id="Animation_s2blb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-156, 40)]
+}
 
 [sub_resource type="Animation" id="Animation_k2go3"]
 resource_name = "story"
@@ -61,21 +77,6 @@ tracks/2/keys = {
 "values": [Vector2(-156, 40), Vector2(-156, 40), Vector2(-246, 2), Vector2(-246, 2), Vector2(0, 2), Vector2(0, 2), Vector2(-246, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_s2blb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/Hand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-156, 40)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2pf4r"]
 _data = {
 &"RESET": SubResource("Animation_s2blb"),
@@ -97,13 +98,17 @@ offset_right = 640.0
 offset_bottom = 360.0
 color = Color(0.4029551, 0.3762884, 0.011383789, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+texture = ExtResource("4_i6uxv")
+centered = false
+
 [node name="SwordLeft" type="Sprite2D" parent="Background"]
-position = Vector2(-141, 54)
+position = Vector2(-176, 63)
 texture = ExtResource("4_f2ko8")
 centered = false
 
 [node name="SwordRight" type="Sprite2D" parent="Background"]
-position = Vector2(-20, 39)
+position = Vector2(21, 36)
 texture = ExtResource("5_c5ef0")
 centered = false
 
