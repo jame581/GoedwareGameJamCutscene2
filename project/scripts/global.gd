@@ -1,13 +1,19 @@
 extends Node
 
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var panel: Panel = $Panel
 
 var current_scene = null
 var current_path : String = ""
+
 
 func _ready() -> void:
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	current_path = current_scene.scene_file_path
+
+	panel.visible = false
+	animation_player.animation_finished.connect(_on_animation_finished)
 
 
 func get_version() -> String:
@@ -20,7 +26,7 @@ func goto_main_menu():
 
 func goto_scene(path):
 	current_path = path
-	call_deferred("_deferred_goto_scene", current_path)
+	animation_player.play("fade_in")
 
 
 func _deferred_goto_scene(path):
@@ -35,3 +41,13 @@ func _deferred_goto_scene(path):
 
 	# Add it to the active scene, as child of root.
 	get_tree().root.add_child(current_scene)
+	animation_player.play("fade_out")
+
+
+func play_transition_animation(animation_name: String) -> void:
+	animation_player.play(animation_name)
+
+
+func _on_animation_finished(anim_name: String) -> void:
+	if anim_name == "fade_in":
+		call_deferred("_deferred_goto_scene", current_path)
