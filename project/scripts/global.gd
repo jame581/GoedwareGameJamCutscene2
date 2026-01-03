@@ -5,6 +5,7 @@ extends Node
 
 var current_scene = null
 var current_path : String = ""
+var mouse_check_enabled: bool = false
 
 
 func _ready() -> void:
@@ -54,3 +55,11 @@ func play_transition_animation(animation_name: String) -> void:
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "fade_in":
 		call_deferred("_deferred_goto_scene", current_path)
+
+
+func set_mouse_check_enabled(enabled: bool) -> void:
+	mouse_check_enabled = enabled
+
+
+func is_mouse_check_enabled() -> bool:
+	return mouse_check_enabled

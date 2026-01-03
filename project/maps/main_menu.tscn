@@ -75,6 +75,13 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Accept"
 
+[node name="MouseCheckButton" type="CheckButton" parent="MarginContainer/HBoxContainer/CenterBoxContainer/MainMenuBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cutscene check by mouse"
+alignment = 1
+autowrap_mode = 3
+
 [node name="RightBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
