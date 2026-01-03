@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6nfpcxjfmvx4"]
+[gd_scene load_steps=12 format=3 uid="uid://b6nfpcxjfmvx4"]
 
 [ext_resource type="Script" uid="uid://w12nksi74sj1" path="res://scripts/camera_movement.gd" id="1_crhbs"]
 [ext_resource type="Script" uid="uid://dfn7ihaib2vov" path="res://scripts/storyboard.gd" id="1_xj4j0"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://c54o4ukoxdaj1" path="res://scenes/equip/scene_equip_1.tscn" id="4_m5gpy"]
 [ext_resource type="PackedScene" uid="uid://bqy8lnybqg3qn" path="res://scenes/scene_intro.tscn" id="4_x4cxl"]
 [ext_resource type="PackedScene" uid="uid://433o07htfwpi" path="res://scenes/equip/scene_equip_3.tscn" id="4_xgy8s"]
+[ext_resource type="PackedScene" uid="uid://c0dn8hgce48ky" path="res://scenes/beginning/scene_mage_start_ritual.tscn" id="5_x4cxl"]
+[ext_resource type="PackedScene" uid="uid://k41q0oaxa3wx" path="res://scenes/beginning/scene_hero_sleeping.tscn" id="6_b3hgm"]
+[ext_resource type="PackedScene" uid="uid://btl3veioma8i0" path="res://scenes/beginning/scene_hero_wakes_up.tscn" id="7_m7d4h"]
+[ext_resource type="PackedScene" uid="uid://bg064ai21rnln" path="res://scenes/beginning/scene_brush_teeth.tscn" id="8_5gba7"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b3hgm"]
 
@@ -31,9 +35,22 @@ stream = ExtResource("3_xgy8s")
 [node name="Story" type="Node" parent="."]
 
 [node name="SceneIntro" parent="Story" instance=ExtResource("4_x4cxl")]
+position = Vector2(0, 3)
+
+[node name="SceneMageStartRitual" parent="Story" instance=ExtResource("5_x4cxl")]
+position = Vector2(1000, 0)
+
+[node name="SceneHeroSleeping" parent="Story" instance=ExtResource("6_b3hgm")]
+position = Vector2(2000, 0)
+
+[node name="SceneHeroWakesUp" parent="Story" instance=ExtResource("7_m7d4h")]
+position = Vector2(3000, 0)
+
+[node name="SceneBrushTeeth" parent="Story" instance=ExtResource("8_5gba7")]
+position = Vector2(4000, 0)
 
 [node name="SceneEquip3" parent="Story" instance=ExtResource("4_xgy8s")]
-position = Vector2(2273, -166)
+position = Vector2(0, 1300)
 
 [node name="SceneEquip4" parent="Story" instance=ExtResource("4_m5gpy")]
-position = Vector2(1394, -202)
+position = Vector2(1000, 1300)
