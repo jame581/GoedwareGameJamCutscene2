@@ -15,7 +15,7 @@
 
 [node name="Storyboard" type="Node2D" node_paths=PackedStringArray("scene_players")]
 script = ExtResource("1_xj4j0")
-scene_players = [NodePath("Story/SceneIntro"), NodePath("Story/SceneEquip4"), NodePath("Story/SceneEquip3")]
+scene_players = [NodePath("Story/SceneIntro"), NodePath("Story/SceneMageStartRitual"), NodePath("Story/SceneHeroSleeping"), NodePath("Story/SceneHeroWakesUp"), NodePath("Story/SceneBrushTeeth"), NodePath("Story/SceneEquip4"), NodePath("Story/SceneEquip3")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -41,13 +41,13 @@ position = Vector2(0, 3)
 position = Vector2(1000, 0)
 
 [node name="SceneHeroSleeping" parent="Story" instance=ExtResource("6_b3hgm")]
-position = Vector2(2000, 0)
+position = Vector2(2500, 0)
 
 [node name="SceneHeroWakesUp" parent="Story" instance=ExtResource("7_m7d4h")]
-position = Vector2(3000, 0)
+position = Vector2(3500, 0)
 
 [node name="SceneBrushTeeth" parent="Story" instance=ExtResource("8_5gba7")]
-position = Vector2(4000, 0)
+position = Vector2(4500, 0)
 
 [node name="SceneEquip3" parent="Story" instance=ExtResource("4_xgy8s")]
 position = Vector2(0, 1300)
