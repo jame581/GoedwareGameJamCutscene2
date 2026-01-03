@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://433o07htfwpi"]
+
+[ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_mm46i"]
+[ext_resource type="AudioStream" uid="uid://dnkxcxbnb0l4j" path="res://resources/sound/button_click.wav" id="2_10e70"]
+[ext_resource type="AudioStream" uid="uid://didhhbvihnqe1" path="res://resources/sound/pencil_check.wav" id="3_mm46i"]
+[ext_resource type="Texture2D" uid="uid://xdmr87g5pyc1" path="res://resources/art/helmet_red.png" id="5_mm46i"]
+[ext_resource type="Texture2D" uid="uid://pmge886bahpn" path="res://resources/art/helmet_blue.png" id="6_10e70"]
+[ext_resource type="Texture2D" uid="uid://brbwv21j61m1" path="res://resources/art/hand.png" id="6_s7wt3"]
+
+[sub_resource type="Animation" id="Animation_s2blb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-156, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_k2go3"]
+resource_name = "story"
+length = 4.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("button_click")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_10e70")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_10e70")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_10e70")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_10e70")
+}],
+"times": PackedFloat32Array(0.4, 1, 2, 2.6)
+}
+tracks/0/use_blend = true
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("pencil_check")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_mm46i")
+}],
+"times": PackedFloat32Array(3.3)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/Hand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8, 1.1, 1.4, 2.1, 2.4, 2.7, 3, 3.91),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-156, 40), Vector2(-156, 40), Vector2(-246, 2), Vector2(-246, 2), Vector2(0, 2), Vector2(0, 2), Vector2(-246, 2), Vector2(-246, 2), Vector2(0, 2), Vector2(0, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2pf4r"]
+_data = {
+&"RESET": SubResource("Animation_s2blb"),
+&"story": SubResource("Animation_k2go3")
+}
+
+[node name="SceneEquip1" type="Node2D"]
+script = ExtResource("1_mm46i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2pf4r")
+}
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.4029551, 0.3762884, 0.011383789, 1)
+
+[node name="HelmetLeft" type="Sprite2D" parent="Background"]
+position = Vector2(-95, 19)
+texture = ExtResource("5_mm46i")
+centered = false
+
+[node name="HelmetRight" type="Sprite2D" parent="Background"]
+position = Vector2(-38, 26)
+texture = ExtResource("6_10e70")
+centered = false
+
+[node name="Hand" type="Sprite2D" parent="Background"]
+position = Vector2(-156, 40)
+texture = ExtResource("6_s7wt3")
+centered = false
+
+[node name="pencil_check" type="AudioStreamPlayer" parent="."]
+
+[node name="button_click" type="AudioStreamPlayer" parent="."]

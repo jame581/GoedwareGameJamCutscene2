@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbu48y4xsjtv4"]
+
+[ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_xkflo"]
+[ext_resource type="Texture2D" uid="uid://brbwv21j61m1" path="res://resources/art/hand.png" id="4_hand"]
+
+[node name="SceneEquip2" type="Node2D"]
+script = ExtResource("1_xkflo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.4029551, 0.3762884, 0.011383789, 1)
+
+[node name="Hand" type="Sprite2D" parent="Background"]
+texture = ExtResource("4_hand")
+centered = false
