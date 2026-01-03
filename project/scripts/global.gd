@@ -43,6 +43,9 @@ func _deferred_goto_scene(path):
 	get_tree().root.add_child(current_scene)
 	animation_player.play("fade_out")
 
+	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
+	get_tree().current_scene = current_scene
+
 
 func play_transition_animation(animation_name: String) -> void:
 	animation_player.play(animation_name)
