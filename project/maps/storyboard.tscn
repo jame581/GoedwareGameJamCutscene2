@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6nfpcxjfmvx4"]
+[gd_scene load_steps=16 format=3 uid="uid://b6nfpcxjfmvx4"]
 
 [ext_resource type="Script" uid="uid://w12nksi74sj1" path="res://scripts/camera_movement.gd" id="1_crhbs"]
 [ext_resource type="Script" uid="uid://dfn7ihaib2vov" path="res://scripts/storyboard.gd" id="1_xj4j0"]
@@ -12,12 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://btl3veioma8i0" path="res://scenes/beginning/scene_hero_wakes_up.tscn" id="7_m7d4h"]
 [ext_resource type="PackedScene" uid="uid://bg064ai21rnln" path="res://scenes/beginning/scene_brush_teeth.tscn" id="8_5gba7"]
 [ext_resource type="PackedScene" uid="uid://dexb60glseouo" path="res://scenes/scene_outro_ritual.tscn" id="11_wfdc6"]
+[ext_resource type="PackedScene" uid="uid://c6eharokgpbk1" path="res://scenes/scene_hero_stance.tscn" id="12_tw5f6"]
+[ext_resource type="PackedScene" uid="uid://dwwpcn0ss30cp" path="res://scenes/scene_walking.tscn" id="13_o5ets"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b3hgm"]
 
 [node name="Storyboard" type="Node2D" node_paths=PackedStringArray("scene_players")]
 script = ExtResource("1_xj4j0")
-scene_players = [NodePath("Story/SceneIntro"), NodePath("Story/SceneMageStartRitual"), NodePath("Story/SceneHeroSleeping"), NodePath("Story/SceneHeroWakesUp"), NodePath("Story/SceneBrushTeeth"), NodePath("Story/SceneEquip4"), NodePath("Story/SceneEquip3"), NodePath("Story/SceneOutroRitual")]
+scene_players = [NodePath("Story/SceneIntro"), NodePath("Story/SceneMageStartRitual"), NodePath("Story/SceneHeroSleeping"), NodePath("Story/SceneHeroWakesUp"), NodePath("Story/SceneBrushTeeth"), NodePath("Story/SceneEquip4"), NodePath("Story/SceneEquip3"), NodePath("Story/SceneHeroStance"), NodePath("Story/SceneHeroWalk"), NodePath("Story/SceneOutroRitual")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -59,6 +61,12 @@ position = Vector2(0, 1300)
 
 [node name="SceneEquip4" parent="Story" instance=ExtResource("4_m5gpy")]
 position = Vector2(1000, 1300)
+
+[node name="SceneHeroStance" parent="Story" instance=ExtResource("12_tw5f6")]
+position = Vector2(1848, 1269)
+
+[node name="SceneHeroWalk" parent="Story" instance=ExtResource("13_o5ets")]
+position = Vector2(2818, 1278)
 
 [node name="SceneOutroRitual" parent="Story" instance=ExtResource("11_wfdc6")]
 position = Vector2(17, 2219)
