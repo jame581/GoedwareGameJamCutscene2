@@ -1,27 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://433o07htfwpi"]
+[gd_scene load_steps=14 format=3 uid="uid://433o07htfwpi"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_mm46i"]
 [ext_resource type="AudioStream" uid="uid://dnkxcxbnb0l4j" path="res://resources/sound/button_click.wav" id="2_10e70"]
-[ext_resource type="AudioStream" uid="uid://didhhbvihnqe1" path="res://resources/sound/pencil_check.wav" id="3_mm46i"]
+[ext_resource type="AudioStream" uid="uid://bj0bfiab5lvba" path="res://resources/sound/correct.wav" id="3_gxar7"]
 [ext_resource type="Texture2D" uid="uid://bv5ntkegyaaku" path="res://resources/art/background_hero.png" id="4_10e70"]
+[ext_resource type="Texture2D" uid="uid://cx1ya6hm31cjt" path="res://resources/art/ph_bluesky.png" id="4_vm6em"]
 [ext_resource type="Texture2D" uid="uid://xdmr87g5pyc1" path="res://resources/art/helmet_red.png" id="5_mm46i"]
 [ext_resource type="Texture2D" uid="uid://pmge886bahpn" path="res://resources/art/helmet_blue.png" id="6_10e70"]
+[ext_resource type="Shader" uid="uid://fwadn8lnrgnx" path="res://shader/outline.gdshader" id="6_nlofw"]
 [ext_resource type="Texture2D" uid="uid://brbwv21j61m1" path="res://resources/art/hand.png" id="6_s7wt3"]
-
-[sub_resource type="Animation" id="Animation_s2blb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/Hand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-156, 40)]
-}
 
 [sub_resource type="Animation" id="Animation_k2go3"]
 resource_name = "story"
@@ -63,7 +50,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_mm46i")
+"stream": ExtResource("3_gxar7")
 }],
 "times": PackedFloat32Array(3.3)
 }
@@ -80,12 +67,45 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(-156, 40), Vector2(-156, 40), Vector2(-246, 2), Vector2(-246, 2), Vector2(0, 2), Vector2(0, 2), Vector2(-246, 2), Vector2(-246, 2), Vector2(0, 2), Vector2(0, 2)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/HelmetRight:material:shader_parameter/type")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.2517986, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_gxar7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/HelmetRight:material:shader_parameter/type")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2pf4r"]
 _data = {
-&"RESET": SubResource("Animation_s2blb"),
+&"RESET": SubResource("Animation_gxar7"),
 &"story": SubResource("Animation_k2go3")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vm6em"]
+shader = ExtResource("6_nlofw")
+shader_parameter/clr = Color(0.45882353, 0.654902, 0.2627451, 1)
+shader_parameter/type = 0
+shader_parameter/thickness = 5.0
 
 [node name="SceneEquip1" type="Node2D"]
 script = ExtResource("1_mm46i")
@@ -97,10 +117,9 @@ libraries = {
 
 [node name="Background" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
-offset_right = 640.0
-offset_bottom = 360.0
-color = Color(0, 0, 0, 1)
+[node name="BackgroundSky" type="Sprite2D" parent="Background"]
+texture = ExtResource("4_vm6em")
+centered = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Background"]
 texture = ExtResource("4_10e70")
@@ -112,6 +131,7 @@ texture = ExtResource("5_mm46i")
 centered = false
 
 [node name="HelmetRight" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_vm6em")
 position = Vector2(-19, -6)
 texture = ExtResource("6_10e70")
 centered = false
