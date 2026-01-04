@@ -1,7 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://chesyx25sdm1n"]
+[gd_scene load_steps=8 format=3 uid="uid://chesyx25sdm1n"]
 
 [ext_resource type="Script" uid="uid://ba15r6yu282hx" path="res://scripts/main_menu.gd" id="1_pibn7"]
 [ext_resource type="Texture2D" uid="uid://cx1ya6hm31cjt" path="res://resources/art/ph_bluesky.png" id="2_krrnc"]
+[ext_resource type="Texture2D" uid="uid://b5u1yuchpym0x" path="res://resources/art/ph_red_sky.png" id="3_km1yj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_krrnc"]
+
+[sub_resource type="Animation" id="Animation_krrnc"]
+resource_name = "sky"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundTexture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 3.3, 3.6, 3.9, 10, 10.5, 11, 11.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_krrnc"), ExtResource("3_km1yj"), ExtResource("2_krrnc"), ExtResource("3_km1yj"), ExtResource("2_krrnc"), ExtResource("3_km1yj"), ExtResource("2_krrnc"), ExtResource("3_km1yj"), ExtResource("2_krrnc")]
+}
+
+[sub_resource type="Animation" id="Animation_km1yj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundTexture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_krrnc")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bneil"]
+_data = {
+&"RESET": SubResource("Animation_km1yj"),
+&"sky": SubResource("Animation_krrnc")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -33,63 +74,55 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="BoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="LeftBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="CreditsLabel" type="Label" parent="MarginContainer/BoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
+text = "Programmers: hubacekjakub, JaMe
 
-[node name="CreditsLabel" type="Label" parent="MarginContainer/HBoxContainer/LeftBoxContainer"]
-layout_mode = 2
-text = "Programmers:
-hubacekjakub
-JaMe"
-horizontal_alignment = 1
+Art and Music: Meru"
 vertical_alignment = 1
 
-[node name="CenterBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="JustMargin" type="PanelContainer" parent="MarginContainer/BoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="VersionLabel" type="Label" parent="MarginContainer/HBoxContainer/CenterBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Version: 1.0"
-horizontal_alignment = 1
-
-[node name="MainMenuBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer/CenterBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_krrnc")
+
+[node name="Panel" type="Panel" parent="MarginContainer/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainMenuBox" type="VBoxContainer" parent="MarginContainer/BoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -27.5
+offset_right = 176.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/CenterBoxContainer/MainMenuBox"]
+[node name="Label" type="Label" parent="MarginContainer/BoxContainer/Panel/MainMenuBox"]
 layout_mode = 2
 text = "Quest: Stop the Ritual"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/CenterBoxContainer/MainMenuBox"]
+[node name="StartButton" type="Button" parent="MarginContainer/BoxContainer/Panel/MainMenuBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Accept"
 
-[node name="RightBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 15
-
-[node name="CreditsLabel" type="Label" parent="MarginContainer/HBoxContainer/RightBoxContainer"]
-layout_mode = 2
-text = "Art and Music:
-Meru"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MouseCheckButton" type="CheckButton" parent="MarginContainer/HBoxContainer/RightBoxContainer"]
+[node name="MouseCheckButton" type="CheckButton" parent="MarginContainer/BoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
@@ -97,4 +130,16 @@ text = "Cutscene check by mouse"
 alignment = 1
 autowrap_mode = 3
 
+[node name="VersionLabel" type="Label" parent="MarginContainer/BoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Version: 1.0"
+horizontal_alignment = 1
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bneil")
+}
+autoplay = "sky"
