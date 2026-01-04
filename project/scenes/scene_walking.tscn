@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwwpcn0ss30cp"]
+[gd_scene load_steps=10 format=3 uid="uid://dwwpcn0ss30cp"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_rgrk6"]
-[ext_resource type="Texture2D" uid="uid://d2w751bewx6gt" path="res://resources/art/ph_background_herowalking.png" id="2_rj5xd"]
+[ext_resource type="Texture2D" uid="uid://bdyc6gohey4du" path="res://resources/art/background_for_walking.png" id="2_00beu"]
 [ext_resource type="Shader" uid="uid://fwadn8lnrgnx" path="res://shader/outline.gdshader" id="3_00beu"]
+[ext_resource type="Texture2D" uid="uid://dq2dvjo4vyxr5" path="res://resources/art/foreground_for_walking.png" id="3_utydn"]
 [ext_resource type="Texture2D" uid="uid://civoag6havbv8" path="res://resources/art/walking_hero.png" id="4_4nmnh"]
 
 [sub_resource type="Animation" id="Animation_rj5xd"]
@@ -71,7 +72,12 @@ libraries = {
 [node name="Background" type="Node2D" parent="."]
 
 [node name="PhBackgroundHerowalking" type="Sprite2D" parent="Background"]
-texture = ExtResource("2_rj5xd")
+texture = ExtResource("2_00beu")
+centered = false
+
+[node name="PhForegroundHerowalking" type="Sprite2D" parent="Background"]
+z_index = 1
+texture = ExtResource("3_utydn")
 centered = false
 
 [node name="PhHeroWalking" type="Sprite2D" parent="."]
@@ -80,3 +86,4 @@ position = Vector2(352, 0)
 texture = ExtResource("4_4nmnh")
 centered = false
 hframes = 2
+frame = 1
