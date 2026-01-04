@@ -1,14 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://dexb60glseouo"]
+[gd_scene load_steps=16 format=3 uid="uid://dexb60glseouo"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_sogbt"]
 [ext_resource type="AudioStream" uid="uid://clst8udu23qq" path="res://resources/sound/mage_line_evil_laugh.wav" id="2_0ftdb"]
+[ext_resource type="AudioStream" uid="uid://ut0otsamjkqq" path="res://resources/sound/boss_walking.wav" id="3_5ho0h"]
 [ext_resource type="Texture2D" uid="uid://y1sctwk780cv" path="res://resources/art/finalscene/finalscene_background.png" id="3_vsuqu"]
+[ext_resource type="AudioStream" uid="uid://bdy1p3aq26idm" path="res://resources/sound/boss_roar.wav" id="4_70tsr"]
 [ext_resource type="Texture2D" uid="uid://c8duqm1jso3sk" path="res://resources/art/finalscene/finalscene_boss_body.png" id="4_mwv28"]
 [ext_resource type="Texture2D" uid="uid://cy0q0vq6f405y" path="res://resources/art/finalscene/finalscene_boss_head.png" id="5_5ho0h"]
 [ext_resource type="Texture2D" uid="uid://dxil55056gi6u" path="res://resources/art/finalscene/finalscene_mage_arms.png" id="6_70tsr"]
 [ext_resource type="Texture2D" uid="uid://dktxbyi55gdv4" path="res://resources/art/finalscene/finalscene_mage_head.png" id="7_tq4op"]
 [ext_resource type="Texture2D" uid="uid://dxiuqkhxxam54" path="res://resources/art/finalscene/finalscene_floor.png" id="8_b6wua"]
 [ext_resource type="Texture2D" uid="uid://d2y4tanb674eo" path="res://resources/art/finalscene/finalscene_mage_body.png" id="9_8uitd"]
+[ext_resource type="Texture2D" uid="uid://pmge886bahpn" path="res://resources/art/helmet_blue.png" id="12_tq4op"]
 
 [sub_resource type="Animation" id="Animation_0ftdb"]
 length = 0.001
@@ -39,11 +42,11 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_tak1x"]
 resource_name = "story"
-length = 10.0
+length = 22.0
 tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/path = NodePath("MageLaugh")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -52,7 +55,7 @@ tracks/0/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("2_0ftdb")
 }],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(4)
 }
 tracks/0/use_blend = true
 tracks/1/type = "value"
@@ -62,10 +65,10 @@ tracks/1/path = NodePath("Background/FinalsceneBackground:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -74,7 +77,7 @@ tracks/2/path = NodePath("Background/FinalsceneMageArms:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.56666666, 0.6666667, 0.8333333, 0.93333334, 1.0666667, 1.1666666, 1.31, 1.41, 1.58, 1.6666667, 1.87, 1.9666668, 2.13, 2.2, 2.36, 2.42, 2.5666668, 2.61, 2.7),
+"times": PackedFloat32Array(4.5666666, 4.666667, 4.833333, 4.9333334, 5.0666666, 5.1666665, 5.31, 5.41, 5.58, 5.666667, 5.87, 5.9666667, 6.13, 6.2, 6.3599997, 6.42, 6.5666666, 6.6099997, 6.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(320, 180), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 175), Vector2(320, 185), Vector2(320, 175), Vector2(320, 185), Vector2(320, 175), Vector2(320, 180)]
@@ -86,7 +89,7 @@ tracks/3/path = NodePath("Background/FinalsceneMageHead:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.56666666, 0.6666667, 0.8333333, 0.93333334, 1.0666667, 1.1666666, 1.31, 1.41, 1.58, 1.6666667, 1.87, 1.9666668, 2.13, 2.2, 2.36, 2.42, 2.5666668, 2.61, 2.7),
+"times": PackedFloat32Array(4.5666666, 4.666667, 4.833333, 4.9333334, 5.0666666, 5.1666665, 5.31, 5.41, 5.58, 5.666667, 5.87, 5.9666667, 6.13, 6.2, 6.3599997, 6.42, 6.5666666, 6.6099997, 6.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(320, 180), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 170), Vector2(320, 190), Vector2(320, 175), Vector2(320, 185), Vector2(320, 175), Vector2(320, 185), Vector2(320, 175), Vector2(320, 180)]
@@ -98,10 +101,10 @@ tracks/4/path = NodePath("Background/FinalsceneBossBody:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(5.5, 6, 6.8, 7.6, 8.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(15.466666, 16, 16.433332, 16.9, 17.4, 17.866667, 18.366667, 18.833334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(550, 180), Vector2(510, 150), Vector2(480, 200), Vector2(390, 150), Vector2(360, 180)]
+"values": [Vector2(570, 150), Vector2(540, 180), Vector2(510, 150), Vector2(480, 180), Vector2(450, 150), Vector2(420, 180), Vector2(390, 150), Vector2(360, 180)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -110,11 +113,30 @@ tracks/5/path = NodePath("Background/FinalsceneBossHead:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(5.5, 6, 6.8, 7.6, 8.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(15.4667, 16.000034, 16.433365, 16.900032, 17.400032, 17.8667, 18.3667, 18.833366),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(550, 180), Vector2(510, 150), Vector2(480, 200), Vector2(390, 150), Vector2(360, 180)]
+"values": [Vector2(570, 150), Vector2(540, 180), Vector2(510, 150), Vector2(480, 180), Vector2(450, 150), Vector2(420, 180), Vector2(390, 150), Vector2(360, 180)]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MageLaugh")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_5ho0h")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_70tsr")
+}],
+"times": PackedFloat32Array(13.833333, 19.166666)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0t0gj"]
 _data = {
@@ -134,7 +156,6 @@ libraries = {
 
 [node name="FinalsceneBackground" type="Sprite2D" parent="Background"]
 position = Vector2(320, 180)
-scale = Vector2(1.045, 1.045)
 texture = ExtResource("3_vsuqu")
 
 [node name="FinalsceneBossBody" type="Sprite2D" parent="Background"]
@@ -161,4 +182,13 @@ texture = ExtResource("7_tq4op")
 position = Vector2(320, 180)
 texture = ExtResource("8_b6wua")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Hero" type="Node2D" parent="Background"]
+
+[node name="FinalsceneFloor" type="Sprite2D" parent="Background/Hero"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-24, 563)
+texture = ExtResource("12_tq4op")
+
+[node name="MageLaugh" type="AudioStreamPlayer" parent="."]
+
+[node name="BossRoar" type="AudioStreamPlayer" parent="."]
