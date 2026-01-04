@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var camera = $Camera2D
+@onready var music_player = $BackgroundMusic
 
 # Export array of ScenePlayers
 @export var scene_players: Array[ScenePlayer] = []
@@ -10,6 +11,7 @@ var current_scene_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	music_player.play()  # Start background music
 	# Start playing the first scene
 	if scene_players.size() > 0:
 		_play_scene(current_scene_index)
