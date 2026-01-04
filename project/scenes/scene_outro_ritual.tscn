@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dexb60glseouo"]
+[gd_scene load_steps=17 format=3 uid="uid://dexb60glseouo"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_sogbt"]
 [ext_resource type="AudioStream" uid="uid://clst8udu23qq" path="res://resources/sound/mage_line_evil_laugh.wav" id="2_0ftdb"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bdy1p3aq26idm" path="res://resources/sound/boss_roar.wav" id="4_70tsr"]
 [ext_resource type="Texture2D" uid="uid://c8duqm1jso3sk" path="res://resources/art/finalscene/finalscene_boss_body.png" id="4_mwv28"]
 [ext_resource type="Texture2D" uid="uid://cy0q0vq6f405y" path="res://resources/art/finalscene/finalscene_boss_head.png" id="5_5ho0h"]
+[ext_resource type="AudioStream" uid="uid://gvihblccity2" path="res://resources/sound/hero_walk.wav" id="5_70tsr"]
 [ext_resource type="Texture2D" uid="uid://dxil55056gi6u" path="res://resources/art/finalscene/finalscene_mage_arms.png" id="6_70tsr"]
 [ext_resource type="Texture2D" uid="uid://dktxbyi55gdv4" path="res://resources/art/finalscene/finalscene_mage_head.png" id="7_tq4op"]
 [ext_resource type="Texture2D" uid="uid://dxiuqkhxxam54" path="res://resources/art/finalscene/finalscene_floor.png" id="8_b6wua"]
@@ -38,6 +39,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(550, 165)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/Hero/FinalsceneFloor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-61, 510)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/Hero/FinalsceneFloor:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.6, 0.6)]
 }
 
 [sub_resource type="Animation" id="Animation_tak1x"]
@@ -137,6 +162,73 @@ tracks/6/keys = {
 "times": PackedFloat32Array(13.833333, 19.166666)
 }
 tracks/6/use_blend = true
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HeroWalk")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_70tsr")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_70tsr")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_70tsr")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_70tsr")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_70tsr")
+}],
+"times": PackedFloat32Array(0.46666667, 1.2, 2, 2.7, 3.5)
+}
+tracks/7/use_blend = true
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HeroWalk:pitch_scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.46, 0.46666667, 1.2, 2, 2.8000002),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.9, 0.9, 1.1, 1.0, 2.1999999999999997]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Background/Hero/FinalsceneFloor:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.54, 1.19, 2.02, 2.76, 3.52, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-8, 391), Vector2(-8, 391), Vector2(15.000002, 374), Vector2(-67, 362), Vector2(-40.999996, 346), Vector2(-120.205, 336), Vector2(-66.58, 336)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Background/Hero/FinalsceneFloor:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.54, 1.19, 2.02, 2.76, 3.52, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.5, 0.5), Vector2(0.6, 0.6), Vector2(0.75, 0.75), Vector2(0.85, 0.85), Vector2(1, 1), Vector2(1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0t0gj"]
 _data = {
@@ -186,9 +278,13 @@ texture = ExtResource("8_b6wua")
 
 [node name="FinalsceneFloor" type="Sprite2D" parent="Background/Hero"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(-24, 563)
+position = Vector2(-61, 510)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("12_tq4op")
 
 [node name="MageLaugh" type="AudioStreamPlayer" parent="."]
 
 [node name="BossRoar" type="AudioStreamPlayer" parent="."]
+
+[node name="HeroWalk" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.9
