@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqja7200646qw"]
+
+[ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_7s3o0"]
+
+[sub_resource type="Animation" id="Animation_s5jxw"]
+resource_name = "story"
+length = 2.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qegba"]
+_data = {
+&"story": SubResource("Animation_s5jxw")
+}
+
+[node name="SceneWtf" type="Node2D"]
+script = ExtResource("1_7s3o0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qegba")
+}
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 270.0
+offset_top = 167.5
+offset_right = 370.0
+offset_bottom = 192.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.4509804, 0.74509805, 0.827451, 1)
+text = "What is happening?
+
+I have to get up."
+horizontal_alignment = 1
+vertical_alignment = 1
