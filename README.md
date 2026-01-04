@@ -13,11 +13,23 @@ This project is our submission for  GoedWare Game Jam Cutscene 2 Edition game ja
 
 ## Game description
 
-TBA
+Every hero needs an epic entrance - but timing is everything.
+
+Our take on the theme focuses on a funny hero buildup where the "legendary arrival" happens just a little too late to be useful. We wanted to lean into the comedic contrast between a grand cinematic introduction and the awkward reality of missing the mark.
+
+The Concept: A humorous, cinematic look at missed cues and failed timing.
 
 ### Controls
 
-Move the mouse to rotate the cutscene. This control is not for video. Left-click, Right-click, Middle-click or double-click to reset the rotation.
+**Mouse Controls:**
+- Move the mouse to rotate the cutscene (can be enabled in main menu)
+- Left-click, Right-click, Middle-click, or Double-click to reset rotation
+
+**Keyboard Controls:**
+- Arrow keys (Left/Right) or A/D keys to rotate the screen
+- R key to reset view
+
+*Note: These controls apply to the realtime render view, not the video playback.*
 
 ## Requirements
 
@@ -40,4 +52,7 @@ All graphics, sounds and music assets were created by [Meru](https://merulon.itc
 
 ### Screenshots
 
-TBA
+![Screenshot 1](screenshots/cutscene_1.png)
+![Screenshot 2](screenshots/cutscene_2.png)
+![Screenshot 3](screenshots/cutscene_3.png)
+![Main Menu](screenshots/main_menu.png)
