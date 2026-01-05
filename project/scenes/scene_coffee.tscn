@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://drhpj1f686ikj"]
+[gd_scene load_steps=7 format=3 uid="uid://drhpj1f686ikj"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_q2skl"]
 [ext_resource type="Texture2D" uid="uid://b0b1pselrpv4m" path="res://resources/art/coffee.png" id="2_ql7to"]
@@ -51,9 +51,45 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4.033334, 4.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["5
+", "4
+", "3
+", "2
+", "1
+", "0
+
+"]
+}
+
+[sub_resource type="Animation" id="Animation_dehqx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["5
+"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dehqx"]
 _data = {
+&"RESET": SubResource("Animation_dehqx"),
 &"story": SubResource("Animation_rve8t")
 }
 
@@ -73,3 +109,22 @@ centered = false
 hframes = 2
 
 [node name="CoffeePour" type="AudioStreamPlayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 115.99999
+offset_top = 112.0
+offset_right = 186.0
+offset_bottom = 192.0
+scale = Vector2(0.89913213, 0.8614693)
+color = Color(0.08235294, 0.11372549, 0.15686275, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 227.0
+offset_bottom = 263.0
+theme_override_colors/font_color = Color(0.65882355, 0.70980394, 0.69803923, 1)
+theme_override_colors/font_shadow_color = Color(0.5058824, 0.5921569, 0.5882353, 1)
+theme_override_font_sizes/font_size = 42
+text = "5
+"
