@@ -4,6 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://b0b1pselrpv4m" path="res://resources/art/coffee.png" id="2_ql7to"]
 [ext_resource type="AudioStream" uid="uid://8yemea4f7bp6" path="res://resources/sound/coffee_pour.wav" id="2_rve8t"]
 
+[sub_resource type="Animation" id="Animation_dehqx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["5
+"]
+}
+
 [sub_resource type="Animation" id="Animation_rve8t"]
 resource_name = "story"
 length = 5.1
@@ -71,22 +87,6 @@ tracks/3/keys = {
 "]
 }
 
-[sub_resource type="Animation" id="Animation_dehqx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["5
-"]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dehqx"]
 _data = {
 &"RESET": SubResource("Animation_dehqx"),
@@ -110,21 +110,13 @@ hframes = 2
 
 [node name="CoffeePour" type="AudioStreamPlayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 115.99999
-offset_top = 112.0
-offset_right = 186.0
-offset_bottom = 192.0
-scale = Vector2(0.89913213, 0.8614693)
-color = Color(0.08235294, 0.11372549, 0.15686275, 1)
-
 [node name="Label" type="Label" parent="."]
-offset_left = 128.0
-offset_top = 128.0
-offset_right = 227.0
-offset_bottom = 263.0
+offset_left = 130.0
+offset_top = 62.0
+offset_right = 229.0
+offset_bottom = 197.0
 theme_override_colors/font_color = Color(0.65882355, 0.70980394, 0.69803923, 1)
 theme_override_colors/font_shadow_color = Color(0.5058824, 0.5921569, 0.5882353, 1)
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 28
 text = "5
 "
