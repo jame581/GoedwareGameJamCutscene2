@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6eharokgpbk1"]
+[gd_scene load_steps=7 format=3 uid="uid://c6eharokgpbk1"]
 
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_ed504"]
 [ext_resource type="Texture2D" uid="uid://ckd6fmkkkuamc" path="res://resources/art/ph_hero_proud.png" id="2_aryj5"]
+[ext_resource type="Texture2D" uid="uid://b5u1yuchpym0x" path="res://resources/art/ph_red_sky.png" id="2_ex331"]
+[ext_resource type="Texture2D" uid="uid://bv5ntkegyaaku" path="res://resources/art/background_hero.png" id="3_ororg"]
 
 [sub_resource type="Animation" id="Animation_aryj5"]
 resource_name = "story"
@@ -34,10 +36,13 @@ libraries = {
 
 [node name="Background" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
-offset_right = 640.0
-offset_bottom = 360.0
-color = Color(0, 0, 0, 1)
+[node name="BackgroundSky2" type="Sprite2D" parent="Background"]
+texture = ExtResource("2_ex331")
+centered = false
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background"]
+texture = ExtResource("3_ororg")
+centered = false
 
 [node name="PhHeroProud" type="Sprite2D" parent="."]
 texture = ExtResource("2_aryj5")
