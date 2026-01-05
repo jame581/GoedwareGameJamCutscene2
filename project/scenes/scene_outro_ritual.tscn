@@ -3,16 +3,43 @@
 [ext_resource type="Script" uid="uid://bb1unqh3w2kj5" path="res://scripts/scene_player.gd" id="1_sogbt"]
 [ext_resource type="AudioStream" uid="uid://clst8udu23qq" path="res://resources/sound/mage_line_evil_laugh.wav" id="2_0ftdb"]
 [ext_resource type="AudioStream" uid="uid://ut0otsamjkqq" path="res://resources/sound/boss_walking.wav" id="3_5ho0h"]
-[ext_resource type="Texture2D" uid="uid://y1sctwk780cv" path="res://resources/art/finalscene/finalscene_background.png" id="3_vsuqu"]
 [ext_resource type="AudioStream" uid="uid://bdy1p3aq26idm" path="res://resources/sound/boss_roar.wav" id="4_70tsr"]
 [ext_resource type="Texture2D" uid="uid://c8duqm1jso3sk" path="res://resources/art/finalscene/finalscene_boss_body.png" id="4_mwv28"]
 [ext_resource type="Texture2D" uid="uid://cy0q0vq6f405y" path="res://resources/art/finalscene/finalscene_boss_head.png" id="5_5ho0h"]
 [ext_resource type="AudioStream" uid="uid://gvihblccity2" path="res://resources/sound/hero_walk.wav" id="5_70tsr"]
 [ext_resource type="Texture2D" uid="uid://dxil55056gi6u" path="res://resources/art/finalscene/finalscene_mage_arms.png" id="6_70tsr"]
+[ext_resource type="Texture2D" uid="uid://16wmncdxlm5c" path="res://resources/art/finalscene/background-finalscene.png" id="6_tq4op"]
 [ext_resource type="Texture2D" uid="uid://dktxbyi55gdv4" path="res://resources/art/finalscene/finalscene_mage_head.png" id="7_tq4op"]
-[ext_resource type="Texture2D" uid="uid://dxiuqkhxxam54" path="res://resources/art/finalscene/finalscene_floor.png" id="8_b6wua"]
 [ext_resource type="Texture2D" uid="uid://d2y4tanb674eo" path="res://resources/art/finalscene/finalscene_mage_body.png" id="9_8uitd"]
+[ext_resource type="Texture2D" uid="uid://hwh6vcc76f6" path="res://resources/art/finalscene/floor-finalscene.png" id="12_70tsr"]
 [ext_resource type="Texture2D" uid="uid://pmge886bahpn" path="res://resources/art/helmet_blue.png" id="12_tq4op"]
+
+[sub_resource type="Animation" id="Animation_70tsr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/FinalsceneBossHead:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(360, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/FinalsceneBossHead:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.50509]
+}
 
 [sub_resource type="Animation" id="Animation_tak1x"]
 resource_name = "story"
@@ -203,33 +230,6 @@ tracks/12/keys = {
 "values": [Vector2(1, 1), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_70tsr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/FinalsceneBossHead:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(360, 180)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Background/FinalsceneBossHead:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.50509]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0t0gj"]
 _data = {
 &"RESET": SubResource("Animation_70tsr"),
@@ -248,10 +248,11 @@ libraries = {
 
 [node name="FinalsceneBackground" type="Sprite2D" parent="Background"]
 position = Vector2(320, 180)
-texture = ExtResource("3_vsuqu")
+scale = Vector2(1.0363908, 1.0363908)
+texture = ExtResource("6_tq4op")
 
 [node name="FinalsceneBossBody" type="Sprite2D" parent="Background"]
-position = Vector2(360, 180)
+position = Vector2(570, 150)
 texture = ExtResource("4_mwv28")
 
 [node name="FinalsceneBossHead" type="Sprite2D" parent="Background"]
@@ -273,7 +274,7 @@ texture = ExtResource("7_tq4op")
 
 [node name="FinalsceneFloor" type="Sprite2D" parent="Background"]
 position = Vector2(320, 180)
-texture = ExtResource("8_b6wua")
+texture = ExtResource("12_70tsr")
 
 [node name="Hero" type="Node2D" parent="Background"]
 

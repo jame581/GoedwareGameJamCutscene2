@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Quest: Stop the Ritual"
-config/version="0.0.10"
+config/version="0.0.11"
 run/main_scene="uid://chesyx25sdm1n"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
