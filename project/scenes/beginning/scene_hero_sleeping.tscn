@@ -157,6 +157,7 @@ texture = ExtResource("4_mbl1e")
 centered = false
 
 [node name="HeroSleepingSprite" type="Sprite2D" parent="."]
+position = Vector2(47, -37)
 texture = ExtResource("5_hs64u")
 centered = false
 hframes = 2
