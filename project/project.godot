@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Quest: Stop the Ritual"
-config/version="1.0.0"
+config/version="1.0.1"
 run/main_scene="uid://chesyx25sdm1n"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cax5wno4wmx7w"
 
 [autoload]
 
