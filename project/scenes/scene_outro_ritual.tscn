@@ -315,6 +315,7 @@ position = Vector2(-66.58, 336)
 texture = ExtResource("12_tq4op")
 
 [node name="MageLaugh" type="AudioStreamPlayer" parent="."]
+volume_db = 8.0
 bus = &"Voice"
 
 [node name="BossRoar" type="AudioStreamPlayer" parent="."]

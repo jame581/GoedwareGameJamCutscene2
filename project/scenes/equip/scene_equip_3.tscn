@@ -10,6 +10,21 @@
 [ext_resource type="Shader" uid="uid://fwadn8lnrgnx" path="res://shader/outline.gdshader" id="6_nlofw"]
 [ext_resource type="Texture2D" uid="uid://brbwv21j61m1" path="res://resources/art/hand.png" id="6_s7wt3"]
 
+[sub_resource type="Animation" id="Animation_gxar7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/HelmetRight:material:shader_parameter/type")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_k2go3"]
 resource_name = "story"
 length = 4.0
@@ -80,21 +95,6 @@ tracks/3/keys = {
 "values": [0, 0, 2]
 }
 
-[sub_resource type="Animation" id="Animation_gxar7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/HelmetRight:material:shader_parameter/type")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2pf4r"]
 _data = {
 &"RESET": SubResource("Animation_gxar7"),
@@ -142,5 +142,6 @@ texture = ExtResource("6_s7wt3")
 centered = false
 
 [node name="pencil_check" type="AudioStreamPlayer" parent="."]
+volume_db = 10.0
 
 [node name="button_click" type="AudioStreamPlayer" parent="."]

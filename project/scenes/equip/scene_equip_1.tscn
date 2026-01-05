@@ -138,5 +138,6 @@ texture = ExtResource("6_xboxt")
 centered = false
 
 [node name="confirm" type="AudioStreamPlayer" parent="."]
+volume_db = 10.0
 
 [node name="button_click" type="AudioStreamPlayer" parent="."]
