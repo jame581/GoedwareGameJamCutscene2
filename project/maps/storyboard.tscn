@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6nfpcxjfmvx4"]
+[gd_scene load_steps=20 format=3 uid="uid://b6nfpcxjfmvx4"]
 
 [ext_resource type="Script" uid="uid://w12nksi74sj1" path="res://scripts/camera_movement.gd" id="1_crhbs"]
 [ext_resource type="Script" uid="uid://dfn7ihaib2vov" path="res://scripts/storyboard.gd" id="1_xj4j0"]
@@ -16,12 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://c6eharokgpbk1" path="res://scenes/scene_hero_stance.tscn" id="12_tw5f6"]
 [ext_resource type="PackedScene" uid="uid://dwwpcn0ss30cp" path="res://scenes/scene_walking.tscn" id="13_o5ets"]
 [ext_resource type="PackedScene" uid="uid://yb4ahdwj5t38" path="res://scenes/beginning/scene_ritual.tscn" id="15_o5ets"]
+[ext_resource type="PackedScene" uid="uid://cv7osi0swgcue" path="res://scenes/scene_intro_part_1.tscn" id="17_ystbd"]
+[ext_resource type="PackedScene" uid="uid://dmsbi8d8bvgf2" path="res://scenes/scene_intro_part_2.tscn" id="18_ilkrd"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b3hgm"]
 
 [node name="Storyboard" type="Node2D" node_paths=PackedStringArray("scene_players")]
 script = ExtResource("1_xj4j0")
-scene_players = [NodePath("Story/SceneIntro"), NodePath("Story/SceneMageStartRitual"), NodePath("Story/SceneRitual"), NodePath("Story/SceneHeroSleeping"), NodePath("Story/SceneHeroWakesUp"), NodePath("Story/SceneWtf"), NodePath("Story/SceneBrushTeeth"), NodePath("Story/SceneEquip4"), NodePath("Story/SceneEquip3"), NodePath("Story/SceneHeroStance"), NodePath("Story/SceneHeroWalk"), NodePath("Story/SceneOutroRitual")]
+scene_players = [NodePath("Story/SceneIntroPart1"), NodePath("Story/SceneMageStartRitual"), NodePath("Story/SceneIntroPart2"), NodePath("Story/SceneRitual"), NodePath("Story/SceneHeroSleeping"), NodePath("Story/SceneHeroWakesUp"), NodePath("Story/SceneWtf"), NodePath("Story/SceneBrushTeeth"), NodePath("Story/SceneEquip4"), NodePath("Story/SceneEquip3"), NodePath("Story/SceneHeroStance"), NodePath("Story/SceneHeroWalk"), NodePath("Story/SceneOutroRitual")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -59,6 +61,7 @@ position = Vector2(3500, 0)
 position = Vector2(4500, 0)
 
 [node name="SceneWtf" parent="Story" instance=ExtResource("10_weltf")]
+position = Vector2(5026, -746)
 
 [node name="SceneBrushTeeth" parent="Story" instance=ExtResource("8_5gba7")]
 position = Vector2(5500, 0)
@@ -77,3 +80,9 @@ position = Vector2(2818, 1278)
 
 [node name="SceneOutroRitual" parent="Story" instance=ExtResource("11_wfdc6")]
 position = Vector2(17, 2219)
+
+[node name="SceneIntroPart1" parent="Story" instance=ExtResource("17_ystbd")]
+position = Vector2(456, -665)
+
+[node name="SceneIntroPart2" parent="Story" instance=ExtResource("18_ilkrd")]
+position = Vector2(1592, -642)
