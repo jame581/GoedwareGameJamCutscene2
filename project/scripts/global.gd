@@ -7,6 +7,7 @@ var current_scene = null
 var current_path : String = ""
 var mouse_check_enabled: bool = false
 
+signal music_state_changed(is_playing: bool)
 
 func _ready() -> void:
 	var root = get_tree().root

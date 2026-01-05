@@ -15,9 +15,14 @@ func _ready() -> void:
 func play():
 	animation_player.play("story")
 
+func pause_music():
+	Global.music_state_changed.emit(false)
+
+func play_music():
+	Global.music_state_changed.emit(true)
+
 # Custom function to handle the animation_finished signal
 func _on_animation_finished(anim_name):
 	if anim_name == "story":
 		print("Animation 'story' finished playing")
 		emit_signal("scene_finished", anim_name)
-

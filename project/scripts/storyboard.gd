@@ -9,12 +9,18 @@ extends Node2D
 # Iterator to keep track of the current scene
 var current_scene_index: int = 0
 
+# Position of paused music
+var paused_music_position: float = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	music_player.play()  # Start background music
 	# Start playing the first scene
 	if scene_players.size() > 0:
 		_play_scene(current_scene_index)
+
+	# Connect to Global's music_state_changed signal
+	Global.music_state_changed.connect(Callable(self, "_on_music_state_changed"))
 
 
 # Custom function to handle the scene_finished signal
@@ -35,6 +41,16 @@ func _play_scene(index: int):
 		scene_players[index].play()
 		scene_players[index].connect("scene_finished", Callable(self, "_on_scene_finished"))
 
+
+# Custom function to handle music state changes
+func _on_music_state_changed(is_playing: bool):
+
+	if not is_playing:
+		paused_music_position = music_player.get_playback_position()
+		music_player.stop()
+	else:
+		music_player.play()
+		music_player.seek(paused_music_position)
 
 # Custom function to go to the main menu
 func _go_to_main_menu():
